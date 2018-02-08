@@ -1,14 +1,14 @@
-/* libvstring/strcat.c */
+/* libvstring/strncat.c */
 
 #include "libvstring.h"
 
 STRPTR StrCat(STRPTR s, STRPTR d)
 {
-	while(*d) d++;
-	
-	while(*d++ = *s++);
+	for(;*d != '\0';++d);
+
+	while(*s != '\0')
+		*d++ = *s++;
 
 	*d = '\0';
-
 	return d;
 }

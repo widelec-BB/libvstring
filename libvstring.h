@@ -26,13 +26,13 @@
 
 #ifndef __NOLIBBASE__
 #define __NOLIBBASE__
-#endif
+#define __UNDEFNOLIBBASE__
+#endif /* __NOLIBBASE__ */
 
 #include <exec/types.h>
 #include <exec/memory.h>
 #include <stdarg.h>
 
-extern struct Library *SysBase;
 
 ULONG FmtLen(STRPTR fmt, ...);
 void FmtPut(STRPTR dest, STRPTR fmt, ...);
@@ -48,12 +48,20 @@ VOID FreeStrArray(STRPTR *array);
 ULONG StrArrayLen(STRPTR *array);
 void StrFree(STRPTR str);
 BOOL StrEqu(STRPTR s1, STRPTR s2);
-STRPTR StrCat(STRPTR s, STRPTR d);
+
+LONG StrNCmp(STRPTR s, STRPTR d, LONG len);
+STRPTR StrStr(STRPTR s, STRPTR d);
+STRPTR StrCat(STRPTR src, STRPTR dest);
+STRPTR StrDup(CONST_STRPTR s);
 
 /* memory alloc and free functions must be a matched pair */
 #define StrFree(s) FreeVec(s)
 #define FmtFree(s) FreeVec(s)
 #define internal_alloc(l) AllocVec(l, MEMF_PUBLIC)
+
+#ifdef __UNDEFNOLIBBASE__
+#undef __NOLIBBASE__
+#endif /* __UNDEFNOLIBBASE__ */
 
 #endif /* __LIBVSTRING_H__ */
 
