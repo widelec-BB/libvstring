@@ -20,6 +20,10 @@ all: mos
 clean:
 	rm -vf $(OBJS) $(LIB) $(DOC)
 
+install: mos
+	cp libvstring.h /gg/usr/include/
+	cp libvstring.a /gg/usr/lib/
+
 mos: CC = ppc-morphos-gcc
 mos: AR = ppc-morphos-ar
 mos: CFLAGS += -DUSE_INLINE_STDARG
